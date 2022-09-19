@@ -35,10 +35,17 @@ Install Laravel and run the following commands.
 ```bash
 # Migrate database.
 php artisan migrate
+```
 
+## Running/Serving
+To run the web server, you may use the following command.
+
+```bash
 # Serve to 0.0.0.0:8080.
 php artisan serve --host=0.0.0.0 --port=8080
 ```
+
+**Note** - If you're hosting multiple websites, it's recommended to use a web server as a reverse proxy such as NGINX and Apache.
 
 ## Credits
 * [Christian Deacon](https://github.com/gamemann)
