@@ -5,7 +5,7 @@ First test website written with Laravel.
 Rename `.env.example` to `.env`. Afterwards, modify settings to suit your needs.
 
 ## Create Database + User
-### Mysql
+### MySQL/MariaDB
 The following Linux/MySQL commands may be used to create the database and assign all privileges to a specific user.
 
 ```bash
