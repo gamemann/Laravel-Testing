@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom/client';
 import InfiniteScroll from 'react-infinite-scroller';
 
 // Some random lines lol (I'm tired).
-const lines = [
+const lines = 
+[
     "A magical line",
     "A cool line",
     "Another line",
@@ -22,14 +23,21 @@ async function loadMore(page)
 {
     var toReturn = [];
 
+    // Simple for loop.
+    /*
     for (var i = 0; i < 50; i++)
     {
         item_id++;
         
-        toReturn.push({id: item_id, name: lines[Math.floor(Math.random()*lines.length)]});
+        toReturn.push({id: item_id, line: lines[Math.floor(Math.random()*lines.length)]});
     }
+    */
 
-    return toReturn;
+    // AJAX request.
+    // More Info => routes/web.php
+    return fetch('/items?page=' + page).then(res => res.json());
+
+    //return toReturn;
 }
 
 const App = () => 
@@ -38,6 +46,7 @@ const App = () =>
     console.log("Launching app...");
 
     // The stateful functions (I love this type of functionality from React).
+    const [pageNum, setPageNum] = useState(0);
     const [items, setItems] = useState([]);
     const [fetching, setFetching] = useState(false);
 
@@ -49,7 +58,8 @@ const App = () =>
 
     const fetchItems = useCallback(
         // ASYNC.
-        async () => {
+        async () => 
+        {
             // If we're already fetching. Return.
             if (fetching) 
             {
@@ -92,7 +102,7 @@ const App = () =>
         <ol id="contentList">
             {items.map(item => (
                 <li key={item.id}>
-                    <p>{item.name}</p>
+                    <p>{item.line}</p>
                 </li>
             ))}
         </ol>
