@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import InfiniteScroll from 'react-infinite-scroller';
 
+// Some random lines lol (I'm tired).
 const lines = [
     "A magical line",
     "A cool line",
@@ -14,14 +15,14 @@ const lines = [
     "This is random."
 ];
 
+// Probably no need, but just in-case keep track of item ID globally.
 var item_id = 0;
 
-
-function loadMore(page)
+async function loadMore(page)
 {
     var toReturn = [];
 
-    for (var i = 0; i < 100; i++)
+    for (var i = 0; i < 50; i++)
     {
         item_id++;
         
@@ -31,25 +32,75 @@ function loadMore(page)
     return toReturn;
 }
 
-var items = loadMore(1);
-
-function Test() 
+const App = () => 
 {
+    // Loggg
+    console.log("Launching app...");
+
+    // The stateful functionality is neat! (this is the first time I'm using ReactJS).
+    const [pageNum, setPageNum] = useState(0);
+    const [items, setItems] = useState([]);
+    const [fetching, setFetching] = useState(false);
+
+    // If our page number is below one, set to one.
+    if (pageNum < 1)
+    {
+        setPageNum(1);
+    }
+
+    const fetchItems = useCallback(
+        // ASYNC.
+        async () => {
+            // If we're already fetching. Return.
+            if (fetching) 
+            {
+                console.log("Already fetching! Returning...");
+
+                return;
+            }
+
+
+        
+            // We're fetching!
+            setFetching(true);
+
+            // Try to fetch new lines/data.
+            try
+            {
+                console.log("Retrieving new items on page " + pageNum + "!");
+
+                // Call our load more function.
+                const newItems = await loadMore(pageNum);
+
+                // Now set our items.
+                setItems([...items, ...newItems]);
+            }
+            finally
+            {
+                // Increase page number and set fetching to false.
+                setPageNum(pageNum + 1);
+
+                setFetching(false);
+            }
+        },
+
+        [items, fetching, pageNum]
+    );
+
     return (
     <InfiniteScroll
-        pageStart={1}
-        loadMore={loadMore}
-        loader={<div class="loadindicator" key={0}>Loading...</div>}>
-        <ul id="contentList">
+        loadMore={fetchItems}
+        hasMore={(pageNum <= 50)}
+        loader={<div class="loadindicator">Loading...</div>}>
+        <ol id="contentList">
             {items.map(item => (
                 <li key={item.id}>
                     <p>{item.name}</p>
                 </li>
             ))}
-        </ul>
+        </ol>
     </InfiniteScroll>);
-}
-
+};
 
 const content = ReactDOM.createRoot(document.getElementById('test'));
-content.render(<Test />);
+content.render(<App/>);
