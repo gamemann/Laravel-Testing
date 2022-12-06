@@ -37,8 +37,7 @@ const App = () =>
     // Loggg
     console.log("Launching app...");
 
-    // The stateful functionality is neat! (this is the first time I'm using ReactJS).
-    const [pageNum, setPageNum] = useState(0);
+    // The stateful functionalreturn] = useState(0);
     const [items, setItems] = useState([]);
     const [fetching, setFetching] = useState(false);
 
@@ -59,8 +58,6 @@ const App = () =>
                 return;
             }
 
-
-        
             // We're fetching!
             setFetching(true);
 
