@@ -37,7 +37,7 @@ const App = () =>
     // Loggg
     console.log("Launching app...");
 
-    // The stateful functionalreturn] = useState(0);
+    // The stateful functions (I love this type of functionality from React).
     const [items, setItems] = useState([]);
     const [fetching, setFetching] = useState(false);
 
