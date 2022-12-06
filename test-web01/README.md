@@ -1,5 +1,7 @@
 # Test Website #1
-First test website written with Laravel.
+This project includes Tailwind CSS and React using the [Infinite Scroller NPM package](https://www.npmjs.com/package/react-infinite-scroller). We demonstrate how to continously load static data from an array. The source file where most of this performed may be found [here](https://github.com/gamemann/Laravel-Testing/blob/master/test-web01/resources/js/components/test.jsx)!
+
+We will be implementing this functionality (both React and the Infinite Scroller package) into [Best Mods](https://bestmods.io) instead of relying on jQuery library called [DataTables](https://datatables.net/).
 
 ## Configuration
 Rename `.env.example` to `.env`. Afterwards, modify settings to suit your needs.
@@ -46,6 +48,9 @@ php artisan serve --host=0.0.0.0 --port=8080
 ```
 
 **Note** - If you're hosting multiple websites, it's recommended to use a web server as a reverse proxy such as NGINX and Apache.
+
+## Demo
+![GIF Video](../demos/test-web01-1.gif)
 
 ## Credits
 * [Christian Deacon](https://github.com/gamemann)
