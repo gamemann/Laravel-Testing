@@ -102,7 +102,7 @@ const App = () =>
         <ol id="contentList">
             {items.map(item => (
                 <li key={item.id}>
-                    <p>{item.line}</p>
+                    <p>{item.line} ({item.id})</p>
                 </li>
             ))}
         </ol>
